@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - R.A.F.H</title>
+    <link rel="stylesheet" href="/static/css/afterlogin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="../static/LOGORAFH.jpg" alt="Logo R.A.F.H" class="logo">
+            <h2>REHABILITATION AND ASSISTANCE FOR FULLY HANDICAPPED</h2>
+        </div>
+        <div class="navbar-pack">
+            <span class="welcome-text" id="username" data-username="{{ username }}">Welcome, {{ username }}</span>
+            <button id="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Input Date and Time -->
+\
+    <!-- Main Content -->
+    <main>
+        <div class="content-container">
+            <!-- Time and Date Display -->
+            <div class="date-time-container">
+                <div class="card" onclick="speak(`The current time is ${new Date().toLocaleTimeString()}.`);">
+                    <p class="time-text">
+                        <span id="time"></span><span class="time-sub-text" id="ampm"></span>
+                    </p>
+                </div>
+                <div class="card day" onclick="speak(`Today's date is ${new Date().toLocaleDateString()}.`);">
+                    <p class="day-text" id="day"></p>
+                </div>
+            </div>
+
+            <!-- Add Reminder and Reminder List -->
+            <div class="reminders-section">
+                <!-- Add Reminder Section -->
+                <div class="reminder-container">
+                    <h2>Add Reminder</h2>
+                    <label for="reminder-date">Time:</label>
+                    <input type="time" id="reminder-time">
+                    <label for="reminder-note">Note:</label>
+                    <textarea id="reminder-note" placeholder="Write your reminder here..."></textarea>
+                    <div class="reminder-buttons">
+                        <button id="add-reminder-btn" onclick="submitReminder()">Add Reminder</button>
+                    </div>
+                </div>
+
+                <!-- Reminder List Section -->
+                <div class="reminder-list-container">
+                    <h2>Your Reminders</h2>
+                    <ul id="reminder-list">
+                        <!-- Daftar pengingat akan ditampilkan oleh JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup -->
+    <div id="reminder-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 R.A.F.H. All rights reserved.</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <p id="toast-message"></p>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Update time every second
+        function updateTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, "0"); // Get hours in 24-hour format
+    const minutes = now.getMinutes().toString().padStart(2, "0"); // Get minutes
+    const seconds = now.getSeconds().toString().padStart(2, "0"); // Get seconds
+
+    document.getElementById("time").textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+        // Update date
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('en-US', options);
+
+            document.getElementById("day").textContent = formattedDate;
+        }
+
+        updateTime();
+        updateDate();
+        setInterval(updateTime, 1000);
+
+        // Validate time input
+        document.getElementById("reminder-time").addEventListener("input", function (event) {
+            const input = event.target;
+            const [hour, minute] = input.value.split(":").map(Number);
+
+            if (hour >= 24) {
+                input.value = `23:${minute.toString().padStart(2, "0")}`;
+            }
+
+            if (minute >= 60) {
+                input.value = `${hour.toString().padStart(2, "0")}:59`;
+            }
+        });
+    </script>
+    <script src="/static/js/afterlogin.js"></script>
+    <script src="/static/js/afterlogin_voice.js"></script>
+</body>
+</html>

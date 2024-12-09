@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - R.A.F.H</title>
+    <link rel="stylesheet" href="/static/css/afterloginblind.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="../static/LOGORAFH.jpg" alt="Logo R.A.F.H" class="logo">
+            <h2>REHABILITATION AND ASSISTANCE FOR FULLY HANDICAPPED FOR VISUALLY IMPAIRED</h2>
+        </div>
+        <div class="navbar-pack">
+            <span class="welcome-text" id="username" data-username="{{ username }}">Welcome, {{ username }}</span>
+            <button id="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="content-container">
+            <!-- Komponen waktu dan tanggal -->
+            <div class="date-time-container">
+                <div class="card" onclick="speak(`The current time is ${new Date().toLocaleTimeString()}.`);">
+                    <p class="time-text">
+                        <span id="time"></span><span class="time-sub-text" id="ampm"></span>
+                    </p>
+                </div>
+                <div class="card day" onclick="speak(`Today's date is ${new Date().toLocaleDateString()}.`);">
+                    <p class="day-text" id="day"></p>
+                </div>
+            </div>
+
+            <!-- Form Add Reminder dan List Reminder -->
+            <div class="reminders-section">
+                <div class="reminder-list-container">
+                    <h2>Your Reminders</h2>
+                    <ul id="reminder-list"></ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup -->
+    <div id="reminder-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 R.A.F.H. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function updateTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, "0"); // Get hours in 24-hour format
+    const minutes = now.getMinutes().toString().padStart(2, "0"); // Get minutes
+    const seconds = now.getSeconds().toString().padStart(2, "0"); // Get seconds
+
+    document.getElementById("time").textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('en-US', options);
+
+            document.getElementById("day").textContent = formattedDate;
+        }
+
+        updateTime();
+        updateDate();
+        setInterval(updateTime, 1000);
+    </script>
+    <script src="/static/js/scripts.js"></script>
+    <script src="/static/js/afterloginblind.js"></script>
+    <script src="/static/js/afterloginblind_voice.js"></script>
+</body>
+</html>

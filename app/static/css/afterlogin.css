@@ -1,0 +1,348 @@
+/* Umum */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    position: relative;
+    text-align: center;
+    padding: 20px 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    max-width: 100px;
+    margin-bottom: 10px;
+}
+
+/* Tombol Logout */
+.navbar-pack {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#logout-btn {
+    padding: 10px 20px;
+    background: #ffcccb;
+    border-radius: 5px;
+    color: #1e3c72;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+    background-color: #ffa6a0;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.content-container {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Date and Time */
+.date-time-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card, .day {
+    width: 300px;
+    height: 150px;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover, .day:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.time-text {
+    font-size: 2.6rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+}
+
+.day-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+}
+
+
+.time-sub-text {
+    font-size: 1rem;
+    margin-left: 5px;
+    font-weight: lighter;
+    color: #ccc;
+}
+
+/* Reminders Section */
+.reminders-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Add Reminder dan List Reminder */
+.reminder-container,
+.reminder-list-container {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.reminder-container h2,
+.reminder-list-container h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Form Input */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="time"], textarea {
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #ffcccb;
+    color: #1e3c72;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffa6a0;
+}
+
+/* Reminder List */
+#reminder-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#reminder-list li {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Popup */
+/* Popup */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0; /* Mulai dengan tidak terlihat */
+    transform: scale(0.8); /* Mulai dengan ukuran kecil */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Efek animasi */
+}
+
+.popup.show {
+    opacity: 1; /* Tampilkan */
+    transform: scale(1); /* Ukuran penuh */
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    animation: popup-appear 0.5s ease-out; /* Efek tambahan */
+}
+
+.popup-content p {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.popup-content button {
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.popup-content button:hover {
+    background-color: #0056b3;
+}
+
+/* Animasi tambahan untuk popup */
+@keyframes popup-appear {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Navbar pack */
+.navbar-pack {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Welcome container */
+.welcome-container {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px 15px;
+    border-radius: 25px; /* Membuat bentuk rounded */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+}
+
+/* Welcome text */
+.welcome-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Tombol Logout */
+#logout-btn {
+    padding: 10px 20px;
+    background: #ffcccb;
+    border-radius: 5px;
+    color: #1e3c72;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+    background-color: #ffa6a0;
+}
+.reminder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Tombol Hapus (Delete Button) */
+.delete-btn {
+    background: #ff4d4d; /* Warna dasar tombol */
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem; /* Ukuran ikon */
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease; /* Transisi halus */
+}
+
+.delete-btn:hover {
+    background: #ff1a1a; /* Warna lebih terang saat hover */
+    transform: scale(1.1); /* Sedikit perbesar saat hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.delete-btn:active {
+    background: #e60000; /* Warna lebih gelap saat diklik */
+    transform: scale(0.9); /* Sedikit mengecil saat klik */
+}
+
+/* Tambahkan animasi ikon */
+.delete-btn i {
+    transition: transform 0.2s ease;
+}
+
+.delete-btn:hover i {
+    transform: rotate(90deg); /* Ikon akan berputar saat hover */
+}
